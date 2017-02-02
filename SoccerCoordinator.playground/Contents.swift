@@ -11,8 +11,7 @@ let name = "name"
 let height = "height"
 let experience = "experience"
 let guardians = "guardians"
-let yes = "yes"
-let no = "no"
+
 
 // Single collection that contains all 18 players
 // Each player is its own dictionary stored in an array
@@ -20,92 +19,92 @@ let no = "no"
 let players = [
     [name: "Joe Smith",
      height: 42,
-     experience: yes,
+     experience: true,
      guardians: "Jim and Jan Smith"
      ],
     [name: "Jill Tanner",
      height: 36,
-     experience: yes,
+     experience: true,
      guardians: "Clara Tanner"
     ],
     [name: "Bill Bon",
      height: 43,
-     experience: yes,
+     experience: true,
      guardians: "Sara and Jenny Bon"
     ],
     [name: "Eva Gordon",
      height: 45,
-     experience: no,
+     experience: false,
      guardians: "Wendy and Mike Gordon"
     ],
     [name: "Matt Gill",
      height: 40,
-     experience: no,
+     experience: false,
      guardians: "Charles and Sylvia Gill"
     ],
     [name: "Kimmy Stein",
      height: 41,
-     experience: no,
+     experience: false,
      guardians: "Bill and Hillary Stein"
     ],
     [name: "Sammy Adams",
      height: 45,
-     experience: no,
+     experience: false,
      guardians: "Jeff Adams"
     ],
     [name: "Karl Saygan",
      height: 42,
-     experience: yes,
+     experience: true,
      guardians: "Heather Bledsoe"
     ],
     [name: "Suzanne Greenberg",
      height: 44,
-     experience: yes,
+     experience: true,
      guardians: "Henrietta Dumas"
     ],
     [name: "Sal Dali",
      height: 41,
-     experience: no,
+     experience: false,
      guardians: "Gala Dali"
     ],
     [name: "Joe Kavalier",
      height: 39,
-     experience: no,
+     experience: false,
      guardians: "Sam and Elaine Kavalier"
     ],
     [name: "Ben Finkelstein",
      height: 44,
-     experience: no,
+     experience: false,
      guardians: "Aaron and Jill Finkelstein"
     ],
     [name: "Diego Soto",
      height: 41,
-     experience: yes,
+     experience: true,
      guardians: "Robin and Sarika Soto"
     ],
     [name: "Chloe Alaska",
      height: 47,
-     experience: no,
+     experience: false,
      guardians: "David and Jamie Alaska"
     ],
     [name: "Arnold Willis",
      height: 43,
-     experience: no,
+     experience: false,
      guardians: "Claire Willis"
     ],
     [name: "Phillip Helm",
      height: 44,
-     experience: yes,
+     experience: true,
      guardians: "Thomas Helm and Eva Jones"
     ],
     [name: "Les Clay",
      height: 42,
-     experience: yes,
+     experience: true,
      guardians: "Wynonna Brown"
     ],
     [name: "Herschel Krustofski",
      height: 45,
-     experience: yes,
+     experience: true,
      guardians: "Hyman and Rachel Krustofski"
     ]
 ]
