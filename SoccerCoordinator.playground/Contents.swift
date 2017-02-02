@@ -40,7 +40,7 @@ let players = [
     ],
     [name: "Matt Gill",
      height: 40,
-     experience: "no",
+     experience: no,
      guardians: "Charles and Sylvia Gill"
     ],
     [name: "Kimmy Stein",
