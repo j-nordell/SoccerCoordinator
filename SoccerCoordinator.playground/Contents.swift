@@ -15,7 +15,6 @@ let guardians = "guardians"
 let yes = "yes"
 let no = "no"
 
-
 // Single collection that contains all 18 players
 // Each player is its own dictionary stored in an array
 
