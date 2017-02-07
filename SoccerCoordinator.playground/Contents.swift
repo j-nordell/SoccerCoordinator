@@ -118,15 +118,12 @@ var teamDragons: [[String: Any]] = []
 var teamRaptors: [[String: Any]] = []
 
 
-// Creation of constants to hold the number of players and the number of teams to avoid "magic numbers"
+// Creation of constants to hold the number of players, number of teams, max 
+// players per team, and max experienced players per team to avoid "magic numbers"
+
 let numPlayers: Int = players.count
 let numTeams: Int = [teamSharks, teamDragons, teamRaptors].count
-
-
-// Creation of empty arrays to hold sorted experienced and inexperienced players
-
-var inexperienced: [[String: Any]] = []
-var experienced: [[String: Any]] = []
+let maxPlayers: Int = Int(ceil(Double(numPlayers / numTeams)))
 
 
 // Sort players by height
@@ -135,22 +132,38 @@ let sortedPlayers = players.sorted{
     (($0 as Dictionary<String, Any>)[height] as? Int)! > (($1 )[height] as? Int)!
 }
 
-/* Unsure this is even needed
-// Function to sort players into experienced and inexperienced subgroups
 
-func sortExperience() {
-    for player in players {
-        if player[experience] as! Bool {
-            experienced.append(player)
+// Creation of variables to hold running totals of the heights of players assigned
+// to the respective teams.
+
+var sharksHeight = 0
+var dragonsHeight = 0
+var raptorsHeight = 0
+
+
+// Function to assign players into the optimal teams
+
+func assignPlayers() {
+    for player in sortedPlayers {
+        if (sharksHeight <= dragonsHeight) && (sharksHeight <= raptorsHeight) &&    (teamSharks.count < maxPlayers){
+            teamSharks.append(player)
+            sharksHeight += player[height] as! Int!
+        } else if (dragonsHeight <= raptorsHeight) && (teamDragons.count < maxPlayers) {
+            teamDragons.append(player)
+            dragonsHeight += player[height] as! Int!
         } else {
-            inexperienced.append(player)
+            teamRaptors.append(player)
+            raptorsHeight += player[height] as! Int!
         }
     }
 }
-*/
 
+assignPlayers()
+print(teamSharks)
 print()
-print(sortedPlayers)
+print(teamDragons)
+print()
+print(teamRaptors)
 
 
 
