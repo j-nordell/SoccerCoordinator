@@ -112,6 +112,7 @@ let players = [
 
 
 // Creation of empty arrays to hold the team roster
+
 var teamSharks: [[String: Any]] = []
 var teamDragons: [[String: Any]] = []
 var teamRaptors: [[String: Any]] = []
@@ -121,11 +122,22 @@ var teamRaptors: [[String: Any]] = []
 let numPlayers: Int = players.count
 let numTeams: Int = [teamSharks, teamDragons, teamRaptors].count
 
+
 // Creation of empty arrays to hold sorted experienced and inexperienced players
+
 var inexperienced: [[String: Any]] = []
 var experienced: [[String: Any]] = []
 
+
+// Sort players by height
+
+let sortedPlayers = players.sorted{
+    (($0 as Dictionary<String, Any>)[height] as? Int)! > (($1 )[height] as? Int)!
+}
+
+/* Unsure this is even needed
 // Function to sort players into experienced and inexperienced subgroups
+
 func sortExperience() {
     for player in players {
         if player[experience] as! Bool {
@@ -135,13 +147,10 @@ func sortExperience() {
         }
     }
 }
+*/
 
-sortExperience()
-print(inexperienced)
 print()
-print(numTeams)
-
-
+print(sortedPlayers)
 
 
 
