@@ -110,6 +110,25 @@ let players = [
     ]
 ]
 
+// Creation of collection to hold letters to guardians/parents,
+// width of the letter in charactersa, and default padding between header elements
+
+var letters: [String] = []
+let letterWidth: Int = 120
+let padding: Int = 20
+
+
+// Creation of constants to hold practice dates and times for teams
+
+let sharksDate = "March 17"
+let sharksTime = "3pm"
+
+let dragonsDate = "March 17"
+let dragonsTime = "1pm"
+
+let raptorsDate = "March 18"
+let raptorsTime = "1pm"
+
 
 // Creation of empty arrays to hold the team roster
 
@@ -136,9 +155,15 @@ func countExperiencedPlayers() -> Int{
 
 let numPlayers: Int = players.count
 let numTeams: Int = [teamSharks, teamDragons, teamRaptors].count
+
+
+// Force a rounding up in case number of players is not equally divisible among teams
 let maxPlayers: Int = Int(ceil(Double(numPlayers / numTeams)))
+
+
 let expPlayers: Int = countExperiencedPlayers()
 let inexpPlayers: Int = players.count - expPlayers
+
 
 // Sort players by height
 
@@ -154,14 +179,17 @@ var sharksHeight: Double = 0.0
 var dragonsHeight: Double = 0.0
 var raptorsHeight: Double = 0.0
 
+
 // Function to determine if the team has reached its max for 
 // the particular experience level of the player
 
 func expMax(currentPlayer: [String: Any], currentTeam: [[String: Any]]) -> Bool{
     var expCount = 0
     var inexpCount = 0
-    let maxExpPlayers = expPlayers / numTeams
-    let maxInexpPlayers = inexpPlayers / numTeams
+    
+    // Force rounding up in case number of players is not evenly divisible across teams
+    let maxExpPlayers = Int(ceil(Double(expPlayers / numTeams)))
+    let maxInexpPlayers = Int(ceil(Double(inexpPlayers / numTeams)))
 
     for player in currentTeam {
         if(player[experience] as! Bool) {
@@ -196,28 +224,126 @@ func assignPlayers() {
 }
 
 
+// Function to add a letter to the letters collection
+
+func addLetter(currentTeam: [[String: Any]], teamName: String) {
+    let leftMargin = "|    "
+    let rightMargin = "|"
+    let playerColumn = "Player:"
+    let teamColumn = "Team:"
+    let dateColumn = "Practice date:"
+    let timeColumn = "Practice time:"
+    let playerHeading = "\(leftMargin)\(playerColumn)\(addSpaces(numSpaces: padding))\(teamColumn)\(addSpaces(numSpaces: padding))\(dateColumn)\(addSpaces(numSpaces: padding))\(timeColumn)"
+    let teamLength = teamName.characters.count
+    
+    for player in currentTeam {
+        var letterString = ""
+        let playerLength = (player[name] as! String).characters.count
+        let greeting = "Dear \(player[guardians] as! String),"
+        let teamDate = getDateForTeam(team: teamName)
+        let teamTime = getTimeForTeam(team: teamName)
+        let blankLine = "\(leftMargin)\(addSpaces(numSpaces: letterWidth - leftMargin.characters.count))\(rightMargin)\n"
+        let firstLine = "\(leftMargin)We welcome you and your child to a new season of soccer!  Your child has been assigned to the \(teamName) team."
+        let secondLine = "\(leftMargin)The first practice will be held on \(teamDate) at \(teamTime).  We look forward to seeing you all at practice!"
+        let signOff = "\(leftMargin)All the best,"
+        let signature = "\(leftMargin)The coaches"
+        letterString += drawBorder()
+        letterString += blankLine
+        letterString += playerHeading
+        letterString += "\(addSpaces(numSpaces: letterWidth - playerHeading.characters.count))\(rightMargin)\n"
+        letterString += "\(leftMargin)\(player[name]!)"
+        letterString += "\(addSpaces(numSpaces: padding + playerColumn.characters.count - playerLength))\(teamName)"
+        letterString += "\(addSpaces(numSpaces: padding + teamColumn.characters.count - teamLength))\(teamDate)"
+        letterString += "\(addSpaces(numSpaces: padding + dateColumn.characters.count - teamDate.characters.count))\(teamTime)"
+        letterString += "\(addSpaces(numSpaces: (letterWidth - playerHeading.characters.count) + timeColumn.characters.count - teamTime.characters.count))\(rightMargin)\n"
+        letterString += blankLine
+        letterString += blankLine
+        letterString += "\(leftMargin)\(greeting)\(addSpaces(numSpaces: letterWidth - leftMargin.characters.count - greeting.characters.count))\(rightMargin)\n"
+        letterString += "\(leftMargin)\(addSpaces(numSpaces: letterWidth - leftMargin.characters.count))\(rightMargin)\n"
+        letterString += "\(firstLine)\(addSpaces(numSpaces: letterWidth - firstLine.characters.count))\(rightMargin)\n"
+        letterString += "\(secondLine)\(addSpaces(numSpaces: letterWidth - secondLine.characters.count))\(rightMargin)\n"
+        letterString += blankLine
+        letterString += "\(signOff)\(addSpaces(numSpaces: letterWidth - signOff.characters.count))\(rightMargin)\n"
+        letterString += blankLine
+        letterString += "\(signature)\(addSpaces(numSpaces: letterWidth - signature.characters.count))\(rightMargin)\n"
+        letterString += blankLine
+        letterString += drawBorder()
+        letters.append(letterString)
+        
+    }
+}
+
+
+//  Function to draw a border on the letters
+
+func drawBorder() -> String {
+    var border = ""
+    for _ in 1...letterWidth {
+        border += "="
+    }
+    border += "\n"
+    return border
+}
+
+
+// Function to add the correct number of spaces
+
+func addSpaces(numSpaces: Int) -> String {
+    var spaces = ""
+    for _ in 1...numSpaces - 1 {
+        spaces += " "
+    }
+    return spaces
+}
+
+
+// Function to return a string based on the team sent in
+
+func getDateForTeam(team: String) -> String {
+    switch team {
+        case "Sharks":
+            return sharksDate
+        case "Dragons":
+            return dragonsDate
+        case "Raptors":
+            return raptorsDate
+        default:
+            return "Unknown"
+    }
+}
+
+
+// Function to return a string based on the team sent in
+
+func getTimeForTeam(team: String) -> String {
+    switch team {
+    case "Sharks":
+        return sharksTime
+    case "Dragons":
+        return dragonsTime
+    case "Raptors":
+        return raptorsTime
+    default:
+        return "Unknown"
+    }
+}
+
+// Call function to assign players to the teams
+
 assignPlayers()
-/*
-print(teamSharks)
-print()
-print(teamDragons)
-print()
-print(teamRaptors)
-print("\n")
-*/
-print("Team heights: ")
-print("Sharks: \(sharksHeight)")
-print("Dragons: \(dragonsHeight)")
-print("Raptors: \(raptorsHeight)")
-print()
-print()
-print("Team height average: ")
-print("Sharks: \(Double(sharksHeight / Double(teamSharks.count)))")
-print("Dragons: \(Double(dragonsHeight / Double(teamDragons.count)))")
-print("Raptors: \(Double(raptorsHeight / Double(teamRaptors.count)))")
-print()
+
+// Add the letters to the collection for the respective teams
+
+addLetter(currentTeam: teamSharks, teamName: "Sharks")
+addLetter(currentTeam: teamDragons, teamName: "Dragons")
+addLetter(currentTeam: teamRaptors, teamName: "Raptors")
 
 
+// Print all the letters for all teams
+
+for letter in letters {
+    print(letter)
+}
 
 
 
