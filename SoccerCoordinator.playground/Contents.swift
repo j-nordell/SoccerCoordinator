@@ -143,7 +143,7 @@ let inexpPlayers: Int = players.count - expPlayers
 // Sort players by height
 
 let sortedPlayers = players.sorted{
-    (($0 as Dictionary<String, Any>)[height] as? Double)! > (($1 )[height] as? Double)!
+    (($0 as [String: Any])[height] as? Double)! > (($1 )[height] as? Double)!
 }
 
 
