@@ -198,6 +198,7 @@ func expMax(currentPlayer: [String: Any], currentTeam: [[String: Any]]) -> Bool{
             inexpCount += 1
         }
     }
+    
     if(inexpCount == maxInexpPlayers && !(currentPlayer[experience]! as! Bool)) || (expCount == maxExpPlayers && currentPlayer[experience] as! Bool){
         return true
     } else {
