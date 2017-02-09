@@ -161,8 +161,8 @@ let numTeams = [teamSharks, teamDragons, teamRaptors].count
 // Force a rounding up in case number of players is not equally divisible among teams
 
 let maxPlayers = Int(ceil(Double(numPlayers) / Double(numTeams)))
-let expPlayers = countExperiencedPlayers()
-let inexpPlayers = players.count - expPlayers
+let experiencedPlayers = countExperiencedPlayers()
+let inexperiencedPlayers = players.count - experiencedPlayers
 
 
 // Sort players by height
@@ -183,23 +183,23 @@ var raptorsHeight = 0.0
 // Function to determine if the team has reached its max for 
 // the particular experience level of the player
 
-func expMax(currentPlayer: [String: Any], currentTeam: [[String: Any]]) -> Bool{
+func experiencedMax(currentPlayer: [String: Any], currentTeam: [[String: Any]]) -> Bool{
     var expCount = 0
-    var inexpCount = 0
+    var inexperiencedCount = 0
     
     // Force rounding up in case number of players is not evenly divisible across teams
-    let maxExpPlayers = Int(ceil(Double(expPlayers) / Double(numTeams)))
-    let maxInexpPlayers = Int(ceil(Double(inexpPlayers) / Double(numTeams)))
+    let maxExperiencedPlayers = Int(ceil(Double(experiencedPlayers) / Double(numTeams)))
+    let maxInexperiencedPlayers = Int(ceil(Double(inexperiencedPlayers) / Double(numTeams)))
 
     for player in currentTeam {
         if(player[experience] as! Bool) {
             expCount += 1
         } else {
-            inexpCount += 1
+            inexperiencedCount += 1
         }
     }
     
-    if(inexpCount == maxInexpPlayers && !(currentPlayer[experience]! as! Bool)) || (expCount == maxExpPlayers && currentPlayer[experience] as! Bool){
+    if(inexperiencedCount == maxInexperiencedPlayers && !(currentPlayer[experience]! as! Bool)) || (expCount == maxExperiencedPlayers && currentPlayer[experience] as! Bool) {
         return true
     } else {
         return false
@@ -211,10 +211,10 @@ func expMax(currentPlayer: [String: Any], currentTeam: [[String: Any]]) -> Bool{
 
 func assignPlayers() {
     for player in sortedPlayers {
-        if (sharksHeight <= dragonsHeight) && (sharksHeight <= raptorsHeight) && !expMax(currentPlayer: player, currentTeam: teamSharks) && (teamSharks.count < maxPlayers) {
+        if (sharksHeight <= dragonsHeight) && (sharksHeight <= raptorsHeight) && !experiencedMax(currentPlayer: player, currentTeam: teamSharks) && (teamSharks.count < maxPlayers) {
             teamSharks.append(player)
             sharksHeight += player[height] as! Double
-        } else if (dragonsHeight <= raptorsHeight) && !expMax(currentPlayer: player, currentTeam: teamDragons) && (teamDragons.count < maxPlayers) {
+        } else if (dragonsHeight <= raptorsHeight) && !experiencedMax(currentPlayer: player, currentTeam: teamDragons) && (teamDragons.count < maxPlayers) {
             teamDragons.append(player)
             dragonsHeight += player[height] as! Double
         } else {
@@ -234,6 +234,7 @@ let rightMargin = "|"
 // Function to add a letter to the letters collection
 
 func addLetter(currentTeam: [[String: Any]], teamName: String) {
+
     let playerColumn = "Player:"
     let teamColumn = "Team:"
     let dateColumn = "Practice date:"
