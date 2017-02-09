@@ -198,11 +198,7 @@ func experiencedMax(currentPlayer: [String: Any], currentTeam: [[String: Any]]) 
     
     // Check to ensure that the max number of players for that experience level has not been reached.  Return false if max has not been reached
     
-    if(inexperiencedCount == maxInexperiencedPlayers && !(currentPlayer[experience]! as! Bool)) || (expCount == maxExperiencedPlayers && currentPlayer[experience] as! Bool) {
-        return true
-    } else {
-        return false
-    }
+    return (inexperiencedCount == maxInexperiencedPlayers && !(currentPlayer[experience]! as! Bool)) || (expCount == maxExperiencedPlayers && currentPlayer[experience] as! Bool)
 }
 
 
