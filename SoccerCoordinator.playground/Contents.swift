@@ -146,7 +146,7 @@ func countExperiencedPlayers() -> Int{
 // Creation of constants to hold the number of players and number of teams
 
 let numPlayers = players.count
-let numTeams = [teamSharks, teamDragons, teamRaptors].count
+let numTeams = 3
 
 
 // Force a rounding up in case number of players is not equally divisible among teams
