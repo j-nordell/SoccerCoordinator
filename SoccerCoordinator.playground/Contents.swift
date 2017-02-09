@@ -160,7 +160,7 @@ let numTeams = [teamSharks, teamDragons, teamRaptors].count
 
 // Force a rounding up in case number of players is not equally divisible among teams
 
-let maxPlayers = Int(ceil(Double(numPlayers / numTeams)))
+let maxPlayers = Int(ceil(Double(numPlayers) / Double(numTeams)))
 let expPlayers = countExperiencedPlayers()
 let inexpPlayers = players.count - expPlayers
 
@@ -188,8 +188,8 @@ func expMax(currentPlayer: [String: Any], currentTeam: [[String: Any]]) -> Bool{
     var inexpCount = 0
     
     // Force rounding up in case number of players is not evenly divisible across teams
-    let maxExpPlayers = Int(ceil(Double(expPlayers / numTeams)))
-    let maxInexpPlayers = Int(ceil(Double(inexpPlayers / numTeams)))
+    let maxExpPlayers = Int(ceil(Double(expPlayers) / Double(numTeams)))
+    let maxInexpPlayers = Int(ceil(Double(inexpPlayers) / Double(numTeams)))
 
     for player in currentTeam {
         if(player[experience] as! Bool) {
@@ -327,7 +327,7 @@ func addSpaces(numSpaces: Int) -> String {
 }
 
 
-// Function to return a string based on the team sent in
+// Function to return a string containing the practice date based on the team sent in
 
 func getDateForTeam(team: String) -> String {
     switch team {
@@ -343,7 +343,7 @@ func getDateForTeam(team: String) -> String {
 }
 
 
-// Function to return a string based on the team sent in
+// Function to return a string containing the practice time based on the team sent in
 
 func getTimeForTeam(team: String) -> String {
     switch team {
