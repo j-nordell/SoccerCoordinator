@@ -255,7 +255,7 @@ func addSpaces(numSpaces: Int) -> String {
 }
 
 
-// Constants for strings used in multiple functions
+// Constants for values used in multiple functions
 
 let letterWidth = 120
 let padding = 20
@@ -297,7 +297,7 @@ func writeLetter(currentPlayer: [String: Any], teamName: String) -> String {
     
     letterContent += writeLetterHeader(currentPlayer: currentPlayer, teamName: teamName)
     letterContent += writeLetterGreeting(currentPlayer: currentPlayer)
-    letterContent += writeLetterBody(currentPlayer: currentPlayer, teamName: teamName)
+    letterContent += writeLetterBody(teamName: teamName)
     letterContent += writeLetterSignature()
     
     return letterContent
@@ -349,7 +349,7 @@ func writeLetterGreeting(currentPlayer: [String: Any]) -> String {
 
 // Function to format the body of the letter
 
-func writeLetterBody(currentPlayer: [String: Any], teamName: String) -> String {
+func writeLetterBody(teamName: String) -> String {
     var letterBody = ""
     let teamDate = getDateForTeam(team: teamName)
     let teamTime = getTimeForTeam(team: teamName)
